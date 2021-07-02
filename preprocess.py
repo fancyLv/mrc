@@ -104,7 +104,8 @@ def process_dureader():
     word_count(output_dir, wordcount_file)
     logging.info('Start train w2v')
     sentences = word2vec.PathLineSentences(output_dir)
-    model = word2vec.Word2Vec(sentences, size=100, window=5, min_count=5, sg=1, workers=multiprocessing.cpu_count())
+    model = word2vec.Word2Vec(sentences, vector_size=100, window=5, min_count=5, sg=1,
+                              workers=multiprocessing.cpu_count())
     logging.info(f'save model to {word2vec_path}')
     model.wv.save_word2vec_format(word2vec_path, binary=True)
     logging.info('Done!')
