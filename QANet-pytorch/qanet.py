@@ -47,8 +47,7 @@ def PosEncoder(x, min_timescale=1.0, max_timescale=1.0e4):
     length = x.size()[1]
     channels = x.size()[2]
     signal = get_timing_signal(length, channels, min_timescale, max_timescale)  # [1, seq_len, hidden_size]
-    return (x + signal).transpose(1,
-                                  2)  # [batch_size, hidden_size, seq_len]  # TODO (x + signal.cuda()).transpose(1, 2)
+    return (x + signal.cuda()).transpose(1, 2)  # [batch_size, hidden_size, seq_len]  # TODO
 
 
 def get_timing_signal(length, channels, min_timescale=1.0, max_timescale=1.0e4):

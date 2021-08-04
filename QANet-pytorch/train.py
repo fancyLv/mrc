@@ -79,14 +79,14 @@ def main(args):
     log.info('Building dataset...')
     collate_func = partial(collate_fn, para_limit=args.para_limit,
                            ques_limit=args.ques_limit, char_limit=args.char_limit)
-    train_dataset = SQuAD(args.train_record_file, is_local=True, use_v2=args.use_squad_v2)  # TODO is_local=False
+    train_dataset = SQuAD(args.train_record_file, is_local=False, use_v2=args.use_squad_v2)
     train_loader = data.DataLoader(train_dataset,
                                    batch_size=args.batch_size,
                                    shuffle=True,
                                    num_workers=args.num_workers,
                                    collate_fn=collate_func)
 
-    dev_dataset = SQuAD(args.dev_record_file, is_local=True, use_v2=args.use_squad_v2)  # TODO is_local=False
+    dev_dataset = SQuAD(args.dev_record_file, is_local=False, use_v2=args.use_squad_v2)
     dev_loader = data.DataLoader(dev_dataset,
                                  batch_size=args.batch_size,
                                  shuffle=False,
